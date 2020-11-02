@@ -116,13 +116,12 @@ For example, a `[0,1,9]` vector will become the following matrix:
 """
 
 def target_to_one_hot(target: np.array) -> np.array:
-    one_hot_matrix = [0 for _ in range(len(target))]
+    one_hot_matrix = [[0 for _ in range(10)] for _ in range(len(target))]
     for indice in range(len(target)):
-      print(indice)
-      one_hot_matrix[indice][target[indice]] = 1
-    ### Done
+      if not target[indice] > 9:
+        one_hot_matrix[indice][target[indice]] = 1
+    ###
     return one_hot_matrix
-print(target_to_one_hot([0,1,9]))
 
 """## Useful functions (3 pts)
 
@@ -132,19 +131,17 @@ Implement the sigmoid function, its derivative and the softmax function:
 def sigmoid(M: np.array) -> np.array:
     """Apply a sigmoid to the input array"""
     # TODO
-    return 1/(1+)
-
-print(sigmoid([1, 2, 4]))
+    return 1/(1+np.exp(-1*np.ones(M.shape)*M))
 
 def d_sigmoid(M: np.array)-> np.array:
     """Compute the derivative of the sigmoid""" 
     # TODO
-    return None
+    return sigmoid(M)*(1-sigmoid(M))
 
 def softmax(X: np.array)-> np.array:
     """Apply a softmax to the input array"""
     # TODO
-    return None
+    return np.exp(X) / np.sum(np.exp(X), axis=0)
 
 """## Feed forward NN
 
